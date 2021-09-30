@@ -85,32 +85,22 @@
         }
       }
     },
-    "/users/:user_id/admin": {
+    "/users/{user_id}/admin": {
       "patch": {
         "tags": ["User"],
         "summary": "Turn user admin",
         "description": "Turn user admin",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  }
-                },
-                "example": {
-                  "name": "User name sample",
-                  "email": "User email sample"
-                }
-              }
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "user ID",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -148,11 +138,22 @@
         }
       }
     },
-    "/users/:user_id": {
+    "/users/{user_id}": {
       "get": {
         "tags": ["User"],
         "summary": "Get a user",
         "description": "Get a user",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "user ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -160,6 +161,9 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": [
+                    "user_id"
+                  ],
                   "properties": {
                     "name": {
                       "type": "string"
